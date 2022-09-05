@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable */
+
+import "./App.css";
+import Form from "./components/Form";
+import Products from "./components/Products";
+import { useState } from "react";
+import uuid from "react-uuid";
+import { v4 as uuidv4 } from "uuid";
+
 
 function App() {
+  const [product, setproduct] = useState([]);
+
+
+  //geting data from form
+
+  const handleData = (datas) => {
+    const newDatas = { id: uuidv4(), ...datas };
+    console.log(newDatas)
+    // setproduct([newDatas]);
+    setproduct([...product, newDatas])
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="container">
+        <Form handleData={handleData} />
+      </div>
+      <Products product={product} />
+    </>
   );
 }
 
